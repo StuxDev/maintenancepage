@@ -32,6 +32,12 @@ The icon tags and the Discord link preview in each page's `<head>` (between the 
 
 Run `bash tests/run.sh` before every release. It needs Python 3 (and PHP 7.4 for the dev-server checks, which are skipped without it). It checks the version (`tests/version.sh`), that every page's Discord preview is valid, under 3,000 bytes and up to date (and that the 404 page has none), and that the icon set is complete and every page's `<head>` lists it.
 
+## Branches
+
+- Work on `test`, or on a feature branch off it. Never push to `main`
+- Changes reach `main` only through a pull request from `test` into `main`, which needs CI to pass and is reviewed and merged by Leo
+- Merging into `main` deploys the site to GitHub Pages. Release commits and tags are made on `test` (`git push origin test --tags`) and go live when the pull request is merged
+
 ## Versioning
 
 This project uses [Date Versioning](https://datevers.ing). To release:
@@ -40,6 +46,7 @@ This project uses [Date Versioning](https://datevers.ing). To release:
 2. Set `VERSION.md` to the same bare version (no `v`): today's **UTC** date as `YY.MM.DD`, or `YY.MM.DD-1`, `-2`… for later releases the same UTC day. Never a future date. Use UTC, not local time: just after midnight in the UK it is still the previous day in UTC.
 3. Run `bash tests/run.sh` (it includes `tests/version.sh`).
 4. Run `./commit.sh` (or `commit.bat` on Windows). It checks the version, commits and tags `vYY.MM.DD`, and never pushes.
+5. Push `test` with its tags (`git push origin test --tags`) and open a pull request from `test` into `main`.
 
 ## Before committing
 
